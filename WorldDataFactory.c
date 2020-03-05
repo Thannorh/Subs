@@ -21,6 +21,7 @@ This could be used to create default states as well as loaded state.
 #include "malletFunctions.h"
 #include "scalpelFunctions.h"
 #include "snazzylabcoatFunctions.h"
+#include "acidFunctions.h"
 
 
 
@@ -109,6 +110,7 @@ Room* Room2_Build()
 	Room_AddRoomExit(room, "east", 1); 
 	/* TODO REQUIRED: Add a gold piece to the list of items in the room */
 	ItemList_AddItem(Room_GetItemList(room), labcoat_Build()); 
+	ItemList_AddItem(Room_GetItemList(room), acid_Build()); 
 	/* return the new room */
 	return room;
 }
@@ -123,6 +125,7 @@ Room* Room3_Build() {
 	Room_AddRoomExit(room, "south", 1); 
 
 	/* add items here */
+	return room; 
 }
 /* TODO ADVANCED: Build room 4 */
 
@@ -137,7 +140,7 @@ WorldData* CreateInitialWorldData()
 
 	/* TODO REQUIRED: update room count to match the number of rooms you have created and added to the world
 	   if this number doesn't match then your game will either crash or you will end up stuck in a broken room with no exits */
-	int roomCount = 3;
+	int roomCount = 4;
 
 	/* create the new WorldData object with 3 rooms */
 	worldData = WorldData_Create("Welcome to my GAM100 Game!\n\n", roomCount);
@@ -146,6 +149,7 @@ WorldData* CreateInitialWorldData()
 	WorldData_SetRoom(worldData, 0, Room0_Build());
 	WorldData_SetRoom(worldData, 1, Room1_Build()); 
 	WorldData_SetRoom(worldData, 2, Room2_Build()); 
+	WorldData_SetRoom(worldData, 3, Room3_Build()); 
 	/* TODO REQUIRED: add rooms 1 and 2 to the world data */
 
 	/* TODO ADVANCED: add additional advanced rooms */

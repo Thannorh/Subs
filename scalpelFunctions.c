@@ -36,6 +36,7 @@ void Scalpel_Use(CommandContext context, GameState* gameState, WorldData* worldD
 
 	if (context != CommandContext_Item_Inventory) {
 		printf("try picking up the scalpel before using it. \n");
+		return; 
 	}
 	if ((GameFlags_IsInList(gameState->gameFlags, "bondscutscored")) && (gameState->currentRoomIndex == 0)) {
 		printf("You've already used the scalpel. \n");

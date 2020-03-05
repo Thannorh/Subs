@@ -88,6 +88,9 @@
     <ClCompile Include="snazzylabcoatFunctions.c">
       <Filter>World Data\Item Functions</Filter>
     </ClCompile>
+    <ClCompile Include="AcidFunctions.c">
+      <Filter>World Data\Item Functions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CommandContext.h">
@@ -193,6 +196,9 @@
       <Filter>World Data\Item Functions</Filter>
     </ClInclude>
     <ClInclude Include="snazzylabcoatFunctions.h">
+      <Filter>World Data\Item Functions</Filter>
+    </ClInclude>
+    <ClInclude Include="acidFunctions.h">
       <Filter>World Data\Item Functions</Filter>
     </ClInclude>
   </ItemGroup>

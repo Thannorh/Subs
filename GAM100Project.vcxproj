@@ -84,6 +84,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="acidFunctions.h" />
     <ClInclude Include="malletFunctions.h" />
     <ClInclude Include="onetimekeycardFunctions.h" />
     <ClInclude Include="scalpelFunctions.h" />
@@ -121,6 +122,7 @@
     <ClInclude Include="Source\WorldDataFactory.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AcidFunctions.c" />
     <ClCompile Include="CommandListFactory.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="malletFunctions.c" />
