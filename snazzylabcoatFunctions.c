@@ -23,7 +23,7 @@ void labcoat_Take(CommandContext context, GameState* gameState, WorldData* world
 	UNREFERENCED_PARAMETER(gameState);
 	UNREFERENCED_PARAMETER(worldData);
 
-	printf("this lab coat is fresh, the pockets feel a little heavy \n");
+	printf("this lab coat is fresh. \n");
 }
 
 void labcoat_Use(CommandContext context, GameState* gameState, WorldData* worldData) {
@@ -53,7 +53,7 @@ void labcoat_Use(CommandContext context, GameState* gameState, WorldData* worldD
 		labcoat = ItemList_FindItem(gameState->inventory, "labcoat");
 
 		/* Tell the user what they did */
-		printf("You slip on the labcoat. You're looking fresh. \n");
+		printf("You slip on the labcoat. +5 charisma. \n");
 		/* Add to the player's score */
 		GameState_ChangeScore(gameState, 10);
 

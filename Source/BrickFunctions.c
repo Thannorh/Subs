@@ -54,7 +54,7 @@ void Brick_Use(CommandContext context, GameState* gameState, WorldData* worldDat
 	}
 
 	/* check if we're in the right room to use the item */
-	if (gameState->currentRoomIndex != 0)
+	if (gameState->currentRoomIndex != 4)
 	{
 		/* we are not in the right room - inform the user of the problem and take no action */
 		printf("You cannot use the brick here. \n");
@@ -62,7 +62,7 @@ void Brick_Use(CommandContext context, GameState* gameState, WorldData* worldDat
 	}
 
 	/* check if the cage has already been broken and scored */
-	if (GameFlags_IsInList(gameState->gameFlags, "cageBrokenScored"))
+	if (GameFlags_IsInList(gameState->gameFlags, "lvl4mobhit"))
 	{
 		/* the player already used the brick - inform the user of the problem and take no action */
 		printf("You already used the brick here. \n");
@@ -87,19 +87,16 @@ void Brick_Use(CommandContext context, GameState* gameState, WorldData* worldDat
 		gameState->inventory = ItemList_Remove(gameState->inventory, brick);
 
 		/* Tell the user what they did */
-		printf("You smash the cage open with the brick, and the brick crumbles.  You can now reach the small egg inside. \n");
+		printf("You bonk the henchie over the head with the brick, he falls to the ground, he will be ok though. \n");
 
 		/* Add to the player's score */
 		GameState_ChangeScore(gameState, 10);
 
 		/* Update the room description to reflect the change in the room */
-		Room_SetDescription(room, "This is room 0.  You are in a display room.  There is a broken cage here. \n");
-
-		/* Add an egg to the current room, since the cage has been bashed open */
-		*roomItemsPtr = ItemList_Add(*roomItemsPtr, Egg_Build());
+		Room_SetDescription(room, "This is room 4.  You are in a bathroom.  There is a goonie on the ground. \n");
 
 		/* the gold piece has not been scored, so mark the flag */
-		gameState->gameFlags = GameFlags_Add(gameState->gameFlags, "cageBrokenScored");
+		gameState->gameFlags = GameFlags_Add(gameState->gameFlags, "lvl4mobhit");
 	}
 }
 

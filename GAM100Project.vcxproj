@@ -85,6 +85,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="acidFunctions.h" />
+    <ClInclude Include="BananaFunctions.h" />
+    <ClInclude Include="hotcoffeepotFunctions.h" />
     <ClInclude Include="malletFunctions.h" />
     <ClInclude Include="onetimekeycardFunctions.h" />
     <ClInclude Include="scalpelFunctions.h" />
@@ -120,10 +122,13 @@
     <ClInclude Include="Source\UseCommandHandler.h" />
     <ClInclude Include="Source\WorldData.h" />
     <ClInclude Include="Source\WorldDataFactory.h" />
+    <ClInclude Include="toiletbrushFunctions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AcidFunctions.c" />
+    <ClCompile Include="bananafunctions.c" />
     <ClCompile Include="CommandListFactory.c" />
+    <ClCompile Include="hotcoffeepotFunctions.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="malletFunctions.c" />
     <ClCompile Include="onetimekeycardFunctions.c" />
@@ -153,6 +158,7 @@
     <ClCompile Include="Source\TakeCommandHandler.c" />
     <ClCompile Include="Source\UseCommandHandler.c" />
     <ClCompile Include="Source\WorldData.c" />
+    <ClCompile Include="toiletbrushFunctions.c" />
     <ClCompile Include="WorldDataFactory.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -16,6 +16,7 @@ This file defines the functions to create a specific item, the "acid".
 #include "Room.h" /* Room_GetItemList, Room_SetDescription */
 #include "ItemList.h" /* ItemList_FindItem, ItemList_Remove, ItemList_Add */
 #include "Item.h" /* Item_Create */
+#include "BrickFunctions.h"
 
 
 /* Helper: The action performed when the acid is taken. */
@@ -86,15 +87,15 @@ void acid_Use(CommandContext context, GameState* gameState, WorldData* worldData
 		gameState->inventory = ItemList_Remove(gameState->inventory, acid);
 
 		/* Tell the user what they did */
-		printf("You drip acid onto the brick, and the brick crumbles, revealing a vent.  You can now move through the wall to the west. \n");
+		printf("You drip acid onto the brick, and the brick crumbles, revealing a vent.  You can now move through the wall to the east. A whole brick drops to the ground. \n");
 
 		/* Add to the player's score */
 		GameState_ChangeScore(gameState, 10);
 
 		Room_AddRoomExit(room, "east", 4);
-
+		*roomItemsPtr = ItemList_Add(*roomItemsPtr, Brick_Build());
 		/* Update the room description to reflect the change in the room */
-		Room_SetDescription(room, "This is room 4.  You are in a concrete/brick.  There is a hole in the wall, that you created, going west . \n");
+		Room_SetDescription(room, "This is room 4.  You are in a concrete/brick room.  There is a hole in the wall, that you created, going west . \n");
 
 		/* the gold piece has not been scored, so mark the flag */
 		gameState->gameFlags = GameFlags_Add(gameState->gameFlags, "ventrevealed");

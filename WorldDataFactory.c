@@ -22,7 +22,8 @@ This could be used to create default states as well as loaded state.
 #include "scalpelFunctions.h"
 #include "snazzylabcoatFunctions.h"
 #include "acidFunctions.h"
-
+#include "toiletbrushFunctions.h"
+#include "BananaFunctions.h"
 
 
 /******************************************************************************
@@ -127,6 +128,51 @@ Room* Room3_Build() {
 	/* add items here */
 	return room; 
 }
+
+Room* Room4_Build() {
+	Room* room = NULL; 
+
+	room = Room_Create("You shimmy through the vent and drop into a bathroom, there is a man at the sink washing his hands. \n"); 
+
+	Room_AddRoomExit(room, "west", 3); 
+	Room_AddRoomExit(room, "north", 5); 
+
+	ItemList_AddItem(Room_GetItemList(room), toiletbrush_Build()); 
+	return room; 
+}
+
+Room* Room5_Build() {
+	Room* room = NULL; 
+
+	room = Room_Create("You head out of the bathroom and into a room with a bear in it! There is a keyswipe on the west wall. \n"); 
+
+	Room_AddRoomExit(room, "south", 4); 
+
+
+	return room; 
+}
+
+Room* Room6_Build() {
+	Room* room = NULL; 
+
+	room = Room_Create("You are in a long hallway. You spot two guards at the end of the hallway. There is a unlocked door to the east. \n"); 
+
+	Room_AddRoomExit(room, "south", 5); 
+	Room_AddRoomExit(room, "east", 7);
+	return room; 
+
+}
+
+Room* Room7_Build() {
+	Room* room = NULL; 
+
+	room = Room_Create("You duck into the room to the right, it's a cafeteria, there is a banana and a pot of hot coffee. \n "); 
+
+	Room_AddRoomExit(room, "west", 6); 
+
+	ItemList_AddItem(Room_GetItemList(room), banana_Build()); 
+	return room; 
+}
 /* TODO ADVANCED: Build room 4 */
 
 
@@ -140,7 +186,7 @@ WorldData* CreateInitialWorldData()
 
 	/* TODO REQUIRED: update room count to match the number of rooms you have created and added to the world
 	   if this number doesn't match then your game will either crash or you will end up stuck in a broken room with no exits */
-	int roomCount = 4;
+	int roomCount = 8;
 
 	/* create the new WorldData object with 3 rooms */
 	worldData = WorldData_Create("Welcome to my GAM100 Game!\n\n", roomCount);
@@ -150,6 +196,10 @@ WorldData* CreateInitialWorldData()
 	WorldData_SetRoom(worldData, 1, Room1_Build()); 
 	WorldData_SetRoom(worldData, 2, Room2_Build()); 
 	WorldData_SetRoom(worldData, 3, Room3_Build()); 
+	WorldData_SetRoom(worldData, 4, Room4_Build()); 
+	WorldData_SetRoom(worldData, 5, Room5_Build()); 
+	WorldData_SetRoom(worldData, 6, Room6_Build());
+	WorldData_SetRoom(worldData, 7, Room7_Build()); 
 	/* TODO REQUIRED: add rooms 1 and 2 to the world data */
 
 	/* TODO ADVANCED: add additional advanced rooms */

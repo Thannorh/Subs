@@ -37,7 +37,7 @@ void Keycard_Use(CommandContext context, GameState* gameState, WorldData* worldD
 	if (context != CommandContext_Item_Inventory) {
 		printf("try picking up the keycard before using it. \n");
 	}
-	if (gameState->currentRoomIndex != 1) {
+	if (gameState->currentRoomIndex != 1 && gameState->currentRoomIndex != 5) {
 		printf("You can't use that here.");
 		return;
 	}
@@ -62,6 +62,10 @@ void Keycard_Use(CommandContext context, GameState* gameState, WorldData* worldD
 		if (gameState->currentRoomIndex == 1) {
 			Room_AddRoomExit(room, "west", 2);
 			Room_SetDescription(room, "Room 1. You have unlocked the door to the west. \n");
+		}
+		if (gameState->currentRoomIndex == 5) {
+			Room_AddRoomExit(room, "west", 6); 
+			Room_SetDescription(room, "Room 5. Unlocked Elevator to the west. \n"); 
 		}
 		/* Add to the player's score */
 		GameState_ChangeScore(gameState, 10);

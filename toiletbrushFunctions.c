@@ -1,46 +1,51 @@
 /******************************************************************************
-filename    scalpelFunctions.c
+filename    toiletbrushFunctions.c
 author      Toby Klauder
 DP email    toby.klauder@digipen.edu
 course      GAM100
 
 Brief Description:
-This file defines the functions to create a specific item, the "scalpel".
+This file defines the functions to create a specific item, the "toiletbrush".
 
 ******************************************************************************/
 #include "stdafx.h" /* UNREFERENCED_PARAMETER, NULL*/
-#include "scalpelFunctions.h" /* Function declarations */
+#include "toiletbrushFunctions.h" /* Function declarations */
 #include "GameState.h" /* struct GameState, GameState_ChangeScore */
 #include "GameFlags.h" /* GameFlags_IsInList */
 #include "WorldData.h" /* WorldData_GetRoom */
 #include "Room.h" /* Room_GetItemList, Room_SetDescription */
 #include "ItemList.h" /* ItemList_FindItem, ItemList_Remove, ItemList_Add */
 #include "Item.h" /* Item_Create */
+#include "onetimekeycardFunctions.h"
 
-void Scalpel_Take(CommandContext context, GameState* gameState, WorldData* worldData) {
+void toiletbrush_Take(CommandContext context, GameState* gameState, WorldData* worldData) {
 	UNREFERENCED_PARAMETER(context);
 	UNREFERENCED_PARAMETER(gameState);
 	UNREFERENCED_PARAMETER(worldData);
 
-	printf("the scalpel has one sharp edge, good for cutting through things. \n");
+	printf("toiletbrush = forbidden backscratcher. \n");
 }
 
-void Scalpel_Use(CommandContext context, GameState* gameState, WorldData* worldData) {
+void toiletbrush_Use(CommandContext context, GameState* gameState, WorldData* worldData) {
 	Room* room;
 	ItemList** roomItemsPtr;
-	Item* scalpel;
+	Item* toiletbrush;
 
 	if ((gameState == NULL) || (worldData == NULL)) {
 		return;
 	}
 
 	if (context != CommandContext_Item_Inventory) {
-		printf("try picking up the scalpel before using it. \n");
-		return; 
-	}
-	if ((GameFlags_IsInList(gameState->gameFlags, "bondscutscored")) && (gameState->currentRoomIndex == 0)) {
-		printf("You've already used the scalpel. \n");
+		printf("try picking up the toiletbrush before using it. \n");
 		return;
+	}
+	if (GameFlags_IsInList(gameState->gameFlags, "bearscratched")) {
+		printf("You've already used the toiletbrush. \n");
+		return;
+	}
+	if (gameState->currentRoomIndex != 5) {
+		printf("You cannot use the toilet brush here. \n"); 
+		return; 
 	}
 	else {
 		/* get the current room */
@@ -54,18 +59,18 @@ void Scalpel_Use(CommandContext context, GameState* gameState, WorldData* worldD
 		}
 
 		/* Find the brick in the player's inventory - it should be there, since we are in the Inventory context */
-		scalpel = ItemList_FindItem(gameState->inventory, "scalpel");
+		toiletbrush = ItemList_FindItem(gameState->inventory, "toiletbrush");
 
 		/* Tell the user what they did */
-		printf("you cut your bonds with the scalpel. You may now move about the room. \n");
-
+		printf("you scratch the bears back with the toilet brush. The bear drops a keycard from between it's teeth. \n");
+		*roomItemsPtr = ItemList_Add(*roomItemsPtr, Keycard_Build());
 		/* Add to the player's score */
 		GameState_ChangeScore(gameState, 10);
-		gameState->inventory = ItemList_Remove(gameState->inventory, scalpel);
-		/* Update the room description to reflect the change in the room */
-		Room_SetDescription(room, "Room 0.  You are in a interrogation room.  There is a keyswipe and a door going south. \n");
 
-		gameState->gameFlags = GameFlags_Add(gameState->gameFlags, "bondscutscored");
+		/* Update the room description to reflect the change in the room */
+		Room_SetDescription(room, "Room 5.  You are in the Bear's Den.  There is a keyswipe and obviously, a bear. \n");
+
+		gameState->gameFlags = GameFlags_Add(gameState->gameFlags, "bearscratched");
 
 	}
 }
@@ -73,6 +78,6 @@ void Scalpel_Use(CommandContext context, GameState* gameState, WorldData* worldD
 
 
 
-Item* Scalpel_Build() {
-	return Item_Create("scalpel", "a scalpel, looks like it could really slice through things easily", true, Scalpel_Use, Scalpel_Take, NULL);
+Item* toiletbrush_Build() {
+	return Item_Create("toiletbrush", "a toiletbrush, looks like it would make for a good, but gross back-scratcher", true, toiletbrush_Use, toiletbrush_Take, NULL);
 }

@@ -1,45 +1,51 @@
 /******************************************************************************
-filename    scalpelFunctions.c
+filename    bananaFunctions.c
 author      Toby Klauder
 DP email    toby.klauder@digipen.edu
 course      GAM100
 
 Brief Description:
-This file defines the functions to create a specific item, the "scalpel".
+This file defines the functions to create a specific item, the "banana".
 
 ******************************************************************************/
 #include "stdafx.h" /* UNREFERENCED_PARAMETER, NULL*/
-#include "scalpelFunctions.h" /* Function declarations */
+#include "bananaFunctions.h" /* Function declarations */
 #include "GameState.h" /* struct GameState, GameState_ChangeScore */
 #include "GameFlags.h" /* GameFlags_IsInList */
 #include "WorldData.h" /* WorldData_GetRoom */
 #include "Room.h" /* Room_GetItemList, Room_SetDescription */
 #include "ItemList.h" /* ItemList_FindItem, ItemList_Remove, ItemList_Add */
 #include "Item.h" /* Item_Create */
+#include "onetimekeycardFunctions.h"
 
-void Scalpel_Take(CommandContext context, GameState* gameState, WorldData* worldData) {
+void banana_Take(CommandContext context, GameState* gameState, WorldData* worldData) {
 	UNREFERENCED_PARAMETER(context);
 	UNREFERENCED_PARAMETER(gameState);
 	UNREFERENCED_PARAMETER(worldData);
 
-	printf("the scalpel has one sharp edge, good for cutting through things. \n");
+	printf("the banana is frozen, could leave a mark . \n");
 }
 
-void Scalpel_Use(CommandContext context, GameState* gameState, WorldData* worldData) {
+void banana_Use(CommandContext context, GameState* gameState, WorldData* worldData) {
 	Room* room;
 	ItemList** roomItemsPtr;
-	Item* scalpel;
+	Item* banana;
 
 	if ((gameState == NULL) || (worldData == NULL)) {
 		return;
 	}
 
 	if (context != CommandContext_Item_Inventory) {
-		printf("try picking up the scalpel before using it. \n");
+		printf("try picking up the banana before using it. \n");
+		return;
+	}
+	if (gameState->currentRoomIndex != 6) {
+		printf("you cannot use that here. \n"); 
 		return; 
 	}
-	if ((GameFlags_IsInList(gameState->gameFlags, "bondscutscored")) && (gameState->currentRoomIndex == 0)) {
-		printf("You've already used the scalpel. \n");
+
+	if (GameFlags_IsInList(gameState->gameFlags, "henchiefakout")) {
+		printf("You've already duped the henchmen. \n");
 		return;
 	}
 	else {
@@ -54,18 +60,19 @@ void Scalpel_Use(CommandContext context, GameState* gameState, WorldData* worldD
 		}
 
 		/* Find the brick in the player's inventory - it should be there, since we are in the Inventory context */
-		scalpel = ItemList_FindItem(gameState->inventory, "scalpel");
+		banana = ItemList_FindItem(gameState->inventory, "banana");
 
 		/* Tell the user what they did */
-		printf("you cut your bonds with the scalpel. You may now move about the room. \n");
-
+		printf("you pull out your frozen banana, the henchmen can't see what it is due to poor lighting, and pass out from shock. They both drop keycards. \n");
+		*roomItemsPtr = ItemList_Add(*roomItemsPtr, Keycard_Build());
+		*roomItemsPtr = ItemList_Add(*roomItemsPtr, Keycard_Build());
 		/* Add to the player's score */
 		GameState_ChangeScore(gameState, 10);
-		gameState->inventory = ItemList_Remove(gameState->inventory, scalpel);
+		gameState->inventory = ItemList_Remove(gameState->inventory, banana);
 		/* Update the room description to reflect the change in the room */
-		Room_SetDescription(room, "Room 0.  You are in a interrogation room.  There is a keyswipe and a door going south. \n");
+		Room_SetDescription(room, "Room 6. You are in the hallway. There are two henchies on the floor. \n");
 
-		gameState->gameFlags = GameFlags_Add(gameState->gameFlags, "bondscutscored");
+		gameState->gameFlags = GameFlags_Add(gameState->gameFlags, "henchiefakout");
 
 	}
 }
@@ -73,6 +80,6 @@ void Scalpel_Use(CommandContext context, GameState* gameState, WorldData* worldD
 
 
 
-Item* Scalpel_Build() {
-	return Item_Create("scalpel", "a scalpel, looks like it could really slice through things easily", true, Scalpel_Use, Scalpel_Take, NULL);
+Item* banana_Build() {
+	return Item_Create("banana", "a banana, looks like it could really slice through things easily", true, banana_Use, banana_Take, NULL);
 }
