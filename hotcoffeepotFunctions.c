@@ -17,6 +17,7 @@ This file defines the functions to create a specific item, the "hotcoffee".
 #include "ItemList.h" /* ItemList_FindItem, ItemList_Remove, ItemList_Add */
 #include "Item.h" /* Item_Create */
 #include "BrickFunctions.h"
+#include "onetimekeycardFunctions.h"
 
 
 /* Helper: The action performed when the hotcoffee is taken. */
@@ -54,7 +55,7 @@ void hotcoffee_Use(CommandContext context, GameState* gameState, WorldData* worl
 	}
 
 	/* check if we're in the right room to use the item */
-	if (gameState->currentRoomIndex != 8)
+	if (gameState->currentRoomIndex != 7)
 	{
 		/* we are not in the right room - inform the user of the problem and take no action */
 		printf("You cannot use the hotcoffee here. \n");
@@ -96,7 +97,7 @@ void hotcoffee_Use(CommandContext context, GameState* gameState, WorldData* worl
 		Room_SetDescription(room, "You are in the break room, there is nothing and nobody in this room, only you, yourself and you. \n");
 
 		/* the gold piece has not been scored, so mark the flag */
-		gameState->gameFlags = GameFlags_Add(gameState->gameFlags, "ventrevealed");
+		gameState->gameFlags = GameFlags_Add(gameState->gameFlags, "meltoccured");
 	}
 }
 

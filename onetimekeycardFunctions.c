@@ -37,7 +37,7 @@ void Keycard_Use(CommandContext context, GameState* gameState, WorldData* worldD
 	if (context != CommandContext_Item_Inventory) {
 		printf("try picking up the keycard before using it. \n");
 	}
-	if (gameState->currentRoomIndex != 1 && gameState->currentRoomIndex != 5) {
+	if (gameState->currentRoomIndex != 1 && gameState->currentRoomIndex != 5 && gameState->currentRoomIndex != 8) {
 		printf("You can't use that here.");
 		return;
 	}
@@ -58,7 +58,7 @@ void Keycard_Use(CommandContext context, GameState* gameState, WorldData* worldD
 		gameState->inventory = ItemList_Remove(gameState->inventory, keycard);
 
 		/* Tell the user what they did */
-		printf("You use the keycard on the keyswipe. A door appears. \n");
+		printf("You use the keycard on the keyswipe. \n");
 		if (gameState->currentRoomIndex == 1) {
 			Room_AddRoomExit(room, "west", 2);
 			Room_SetDescription(room, "Room 1. You have unlocked the door to the west. \n");
@@ -67,13 +67,36 @@ void Keycard_Use(CommandContext context, GameState* gameState, WorldData* worldD
 			Room_AddRoomExit(room, "west", 6); 
 			Room_SetDescription(room, "Room 5. Unlocked Elevator to the west. \n"); 
 		}
+		if (gameState->currentRoomIndex == 8) {
+			if (!(GameFlags_IsInList(gameState->gameFlags, "onekeycardused"))) {
+				gameState->gameFlags = GameFlags_Add(gameState->gameFlags, "onekeycardused");
+				printf("used one keycard \n"); 
+				return; 
+			}
+			if ((GameFlags_IsInList(gameState->gameFlags, "onekeycardused")) && (!(GameFlags_IsInList(gameState->gameFlags, "twokeycardused")))) {
+				gameState->gameFlags = GameFlags_Add(gameState->gameFlags, "twokeycardused");
+				printf("used two keycard \n");
+				return; 
+			}
+			if ((GameFlags_IsInList(gameState->gameFlags, "twokeycardused")) && (!(GameFlags_IsInList(gameState->gameFlags, "threekeycardused")))) {
+				gameState->gameFlags = GameFlags_Add(gameState->gameFlags, "threekeycardused"); 
+				printf("used three keycard \n");
+			}
+
+			if (GameFlags_IsInList(gameState->gameFlags, "threekeycardused")) {
+				Room_AddRoomExit(room, "west", 9); 
+				printf("The wall rumbles and slides up into the ceiling, revealing a myterious room to the west.\n"); 
+			}
+
+		}
+		}
 		/* Add to the player's score */
 		GameState_ChangeScore(gameState, 10);
 
 		/* Update the room description to reflect the change in the room */
 
-	}
 }
+
 
 
 

@@ -24,6 +24,7 @@ This could be used to create default states as well as loaded state.
 #include "acidFunctions.h"
 #include "toiletbrushFunctions.h"
 #include "BananaFunctions.h"
+#include "hotcoffeepotFunctions.h"
 
 
 /******************************************************************************
@@ -144,7 +145,7 @@ Room* Room4_Build() {
 Room* Room5_Build() {
 	Room* room = NULL; 
 
-	room = Room_Create("You head out of the bathroom and into a room with a bear in it! There is a keyswipe on the west wall. \n"); 
+	room = Room_Create("You head out of the bathroom and into a hallway with a bear in it! There is a keyswipe and elevator on the west wall. \n"); 
 
 	Room_AddRoomExit(room, "south", 4); 
 
@@ -158,6 +159,7 @@ Room* Room6_Build() {
 	room = Room_Create("You are in a long hallway. You spot two guards at the end of the hallway. There is a unlocked door to the east. \n"); 
 
 	Room_AddRoomExit(room, "south", 5); 
+	Room_AddRoomExit(room, "west", 8);
 	Room_AddRoomExit(room, "east", 7);
 	return room; 
 
@@ -166,14 +168,47 @@ Room* Room6_Build() {
 Room* Room7_Build() {
 	Room* room = NULL; 
 
-	room = Room_Create("You duck into the room to the right, it's a cafeteria, there is a banana and a pot of hot coffee. \n "); 
+	room = Room_Create("You duck into the room to the right, it's a cafeteria, there is a banana and a pot of hot coffee, as well as a large, mysterious chunk of ice. \n "); 
 
 	Room_AddRoomExit(room, "west", 6); 
 
 	ItemList_AddItem(Room_GetItemList(room), banana_Build()); 
+	ItemList_AddItem(Room_GetItemList(room), hotcoffee_Build());
 	return room; 
 }
-/* TODO ADVANCED: Build room 4 */
+
+Room* Room8_Build() {
+	Room* room = NULL; 
+
+	room = Room_Create("You walk into a room, there is a keyswipe with 3 slots. You don't see a door, what could it unlock? \n"); 
+
+	Room_AddRoomExit(room, "east", 6); 
+
+
+
+
+	return room; 
+}
+
+Room* Room9_Build() {
+	Room* room = NULL; 
+
+	room = Room_Create("You walk into the secret room, it's a loading bay, full of subs. You see one sub with the hatch open. THE END. \n"); 
+
+	Room_AddRoomExit(room, "east", 8); 
+	Room_AddRoomExit(room, "submerge", 10); 
+
+	return room; 
+}
+
+Room* Room10_Build() {
+	Room* room = NULL; 
+
+	room = Room_Create("What are you still doing here? Alright, have it your way, you submerge in your submarine, you launch a missile back and the loading bay, and then turn around quickly, because cool guys don't look at explosions. THE END (for real) \n ");
+	Room_AddRoomExit(room, "surface", 9); 
+
+	return room; 
+}
 
 
 /* ------------------------------------------------------- */
@@ -186,7 +221,7 @@ WorldData* CreateInitialWorldData()
 
 	/* TODO REQUIRED: update room count to match the number of rooms you have created and added to the world
 	   if this number doesn't match then your game will either crash or you will end up stuck in a broken room with no exits */
-	int roomCount = 8;
+	int roomCount = 11;
 
 	/* create the new WorldData object with 3 rooms */
 	worldData = WorldData_Create("Welcome to my GAM100 Game!\n\n", roomCount);
@@ -200,6 +235,9 @@ WorldData* CreateInitialWorldData()
 	WorldData_SetRoom(worldData, 5, Room5_Build()); 
 	WorldData_SetRoom(worldData, 6, Room6_Build());
 	WorldData_SetRoom(worldData, 7, Room7_Build()); 
+	WorldData_SetRoom(worldData, 8, Room8_Build());
+	WorldData_SetRoom(worldData, 9, Room9_Build()); 
+	WorldData_SetRoom(worldData, 10, Room10_Build()); 
 	/* TODO REQUIRED: add rooms 1 and 2 to the world data */
 
 	/* TODO ADVANCED: add additional advanced rooms */
