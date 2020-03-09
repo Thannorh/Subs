@@ -89,6 +89,7 @@
     <ClInclude Include="hotcoffeepotFunctions.h" />
     <ClInclude Include="malletFunctions.h" />
     <ClInclude Include="onetimekeycardFunctions.h" />
+    <ClInclude Include="PokeCommandHandler.h" />
     <ClInclude Include="scalpelFunctions.h" />
     <ClInclude Include="snazzylabcoatFunctions.h" />
     <ClInclude Include="Source\BrickFunctions.h" />
@@ -122,6 +123,7 @@
     <ClInclude Include="Source\UseCommandHandler.h" />
     <ClInclude Include="Source\WorldData.h" />
     <ClInclude Include="Source\WorldDataFactory.h" />
+    <ClInclude Include="SpeakCommandHandler.h" />
     <ClInclude Include="toiletbrushFunctions.h" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +160,7 @@
     <ClCompile Include="Source\TakeCommandHandler.c" />
     <ClCompile Include="Source\UseCommandHandler.c" />
     <ClCompile Include="Source\WorldData.c" />
+    <ClCompile Include="SpeakCommandHandler.c" />
     <ClCompile Include="toiletbrushFunctions.c" />
     <ClCompile Include="WorldDataFactory.c" />
   </ItemGroup>

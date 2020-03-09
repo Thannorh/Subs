@@ -44,7 +44,7 @@ void banana_Use(CommandContext context, GameState* gameState, WorldData* worldDa
 		return; 
 	}
 
-	if (GameFlags_IsInList(gameState->gameFlags, "henchiefakout")) {
+	if (GameFlags_IsInList(gameState->gameFlags, "henchiefakeout")) {
 		printf("You've already duped the henchmen. \n");
 		return;
 	}
@@ -72,7 +72,7 @@ void banana_Use(CommandContext context, GameState* gameState, WorldData* worldDa
 		/* Update the room description to reflect the change in the room */
 		Room_SetDescription(room, "Room 6. You are in the hallway. There are two henchies on the floor. \n");
 
-		gameState->gameFlags = GameFlags_Add(gameState->gameFlags, "henchiefakout");
+		gameState->gameFlags = GameFlags_Add(gameState->gameFlags, "henchiefakeout");
 
 	}
 }

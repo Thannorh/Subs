@@ -1,6 +1,6 @@
 /******************************************************************************
 filename    CommandHandlerFunctions.h
-author      Justin Chambers
+author      Toby Klauder
 DP email    justin.chambers@digipen.edu
 course      GAM100 ** Do not use this code in your team project
 
@@ -40,5 +40,7 @@ void HandleTakeCommand(CommandData* command, GameState *gameState, WorldData *wo
 /* Handles the "use" command, which calls an item-specific function on a given item */
 void HandleUseCommand(CommandData* command, GameState *gameState, WorldData *worldData);
 
+void HandleSpeakCommand(CommandData* command, GameState* gameState, WorldData* worldData); 
+void HandlePokeCommand(CommandData* command, GameState* gameState, WorldData* worldData); 
 /* TODO ADVANCED: create aditional commands (add handler function declarations here)
    this may require the creation of additional .c files to implement the command functions */

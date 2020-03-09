@@ -64,7 +64,10 @@ CommandList* CreateCommandList()
 	CommandList_Add(cmdListPtr, "g", HandleGoCommand, false); 
 	/* TODO ADVANCED: create aditional commands
 	this should require the creation of additional .c files to implement the command functions */
+	CommandList_Add(cmdListPtr, "speak", HandleSpeakCommand, true); 
+	CommandList_Add(cmdListPtr, "s", HandleSpeakCommand, false); 
 
+	CommandList_Add(cmdListPtr, "poke", HandlePokeCommand, true); 
 	/* return the newly created command list */
 	return commandList;
 }
