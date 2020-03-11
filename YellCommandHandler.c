@@ -1,60 +1,65 @@
 /******************************************************************************
-filename    SpeakCommandHandler.c
+filename    YellCommandHandler.c
 author      Toby and Jacob
-DP email    mattpic@digipen.edu
-course      GAM100 
+DP email    toby.klauder@digipen.edu
+course      GAM100
 
 Brief Description:
-This file defines functions that handle the "speak" user command, which outputs some flavortext
+This file defines functions that handle the "poke", for when you have the toiletbrush.
 
 ******************************************************************************/
 #include "stdafx.h" /* NULL, printf, strnlen_s */
-#include "SpeakCommandHandler.h" /* Function declarations */
+#include "PokeCommandHandler.h" /* Function declarations */
 #include "CommandData.h" /* struct CommandData */
 #include "GameState.h" /* struct GameState */
 #include "WorldData.h" /* WorldData_GetRoom */
 #include "Room.h" /* Room_Print, Room_GetItemList */
 #include "ItemList.h" /* ItemList_FindItem */
 #include "Item.h" /* Item_Print */
+#include "GameFlags.h"
+#include "onetimekeycardFunctions.h"
 
-void HandleSpeakCommand(CommandData* command, GameState* gameState, WorldData* worldData) {
+void HandleYellCommand(CommandData* command, GameState* gameState, WorldData* worldData) {
+	UNREFERENCED_PARAMETER(worldData); 
 	UNREFERENCED_PARAMETER(command); 
 	UNREFERENCED_PARAMETER(gameState);
-	UNREFERENCED_PARAMETER(worldData);
+	printf("AHHHHHHHHH\n"); 
 	if (gameState->currentRoomIndex == 0) {
-		printf("You think to youself: Coca Cola from McDonalds is better. \n");
+		printf("You hear someone in the next room yell ""SHUT UP"". \n");
 	}
 	if (gameState->currentRoomIndex == 1) {
-		printf("Merry Christmas you filthy animal. \n"); 
+		printf("The guard hears you he may or may not be awake. \n");
 	}
 	if (gameState->currentRoomIndex == 2) {
-		printf("aw fantastic, if i was smarter i could use some of this. \n"); 
+		printf("The glass beakers shatter you get fluids all over your face.... good thing it was just water. \n");
 	}
 	if (gameState->currentRoomIndex == 3) {
-		printf("Did I ever tell you the definition of insanity? it starts with talking to yourself in a concrete room. \n"); 
+		printf("Nothing happens. \n");
 	}
 	if (gameState->currentRoomIndex == 4) {
-		printf("Hey, can you pass me a roll. \n");
+		printf("Nothing was heard was heard because the water was on. \n");
 	}
 	if (gameState->currentRoomIndex == 5) {
-		printf("beary wanna cracker?. \n");
+		printf("The bear looks at and he's like ""what the heck I'm trying to vibe here"" he didn't but you could see it in his face. \n");
 	}
 	if (gameState->currentRoomIndex == 6) {
-		printf("I'm not the fugitive you're looking for *waves hand*. \n");
+		printf("quietly yell so the henchies dont hear you. \n");
 	}
 	if (gameState->currentRoomIndex == 7) {
-		printf("These prices are astronomically  OUTRAGEOUS. \n");
+		printf("After yelling you think to yourself ""I could really  go for a cup of joe"" . \n");
 	}
 	if (gameState->currentRoomIndex == 8) {
-		printf("eenie meenie miney mo catch a tiger by the toe..... \n ");
+		printf("You think to youself: Coca Cola from McDonalds is better. \n");
 	}
-	if (gameState->currentRoomIndex == 9) {
-		printf("imagine typing ""go submerge"" \n");
+	if (gameState->currentRoomIndex == 9){
+		printf("You hear your yell echo across the sub bay. \n");
 	}
 	if (gameState->currentRoomIndex == 10) {
-		printf("DING DING \n");
+		printf("You think to youself: Coca Cola from McDonalds is better. \n");
 	}
 }
+
+
 /******************************************************************************
 Copyrights, Logos, and EULAs
 

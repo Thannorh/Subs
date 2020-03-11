@@ -1,21 +1,23 @@
 /******************************************************************************
-filename    hotcoffeeFunctions.h
-author      Toby Klauder
-DP email    toby.klauder@digipen.edu
-course      GAM100
+filename    YellCommandHandler.h
+author      Matthew Picioccio
+DP email    mattpic@digipen.edu
+course      GAM100 ** Do not use this code in your team project
 
 Brief Description:
-This file declares the functions to create a specific item, the "hotcoffee".
+This file declares functions that handle the "go" user command, which moves
+the user from one room to another using defined exits.
 
 ******************************************************************************/
 #pragma once
 
-typedef struct Item Item;
+typedef struct CommandData CommandData;
+typedef struct GameState GameState;
+typedef struct WorldData WorldData;
 
 
-/* Build a "brick" object */
-Item* hotcoffee_Build();
-
+/* Handles the "go" command, which moves the user to another room */
+void HandleYellCommand(CommandData* command, GameState* gameState, WorldData* worldData); 
 /******************************************************************************
 Copyrights, Logos, and EULAs
 

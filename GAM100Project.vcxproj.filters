@@ -103,6 +103,12 @@
     <ClCompile Include="SpeakCommandHandler.c">
       <Filter>Commands</Filter>
     </ClCompile>
+    <ClCompile Include="PokeCommandHandler.c">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="YellCommandHandler.c">
+      <Filter>Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CommandContext.h">
@@ -226,6 +232,9 @@
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="PokeCommandHandler.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="YellCommandHandler.h">
       <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>
